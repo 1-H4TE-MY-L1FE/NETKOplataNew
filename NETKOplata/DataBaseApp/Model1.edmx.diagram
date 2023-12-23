@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0cbc384959b1472daff34f4ff4bfff81" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="OplataNETKModel.CardStudent" Width="1.5" PointX="2.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OplataNETKModel.Group" Width="1.5" PointX="0.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OplataNETKModel.InputPrice" Width="1.5" PointX="0.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OplataNETKModel.KatPlat" Width="1.5" PointX="2.375" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OplataNETKModel.PriceLife" Width="1.5" PointX="4.625" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OplataNETKModel.Role" Width="1.5" PointX="6.625" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OplataNETKModel.User" Width="1.5" PointX="6.625" PointY="8.625" IsExpanded="true" />
+        <AssociationConnector Association="OplataNETKModel.FK_CardStudent_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="OplataNETKModel.FK_CardStudent_KatPlat" ManuallyRouted="false" />
+        <AssociationConnector Association="OplataNETKModel.FK_CardStudent_PriceLife" ManuallyRouted="false" />
+        <AssociationConnector Association="OplataNETKModel.FK_InputPrice_CardStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="OplataNETKModel.FK_PriceLife_KatPlat" ManuallyRouted="false" />
+        <AssociationConnector Association="OplataNETKModel.FK_User_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

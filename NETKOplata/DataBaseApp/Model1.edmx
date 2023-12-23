@@ -1,0 +1,511 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище OplataNETKModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CardStudent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdGroup" Type="int" Nullable="false" />
+          <Property Name="IdObshejit" Type="int" Nullable="false" />
+          <Property Name="IdKatPlat" Type="int" Nullable="false" />
+          <Property Name="YearStar" Type="date" />
+          <Property Name="YearFinal" Type="date" />
+          <Property Name="Otchis" Type="int" />
+          <Property Name="Note" Type="nvarchar" MaxLength="50" />
+          <Property Name="Room" Type="int" />
+          <Property Name="Image" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InputPrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatePrice" Type="date" Nullable="false" />
+          <Property Name="NumberDoc" Type="int" Nullable="false" />
+          <Property Name="SumPrice" Type="int" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCardStudent" Type="int" Nullable="false" />
+          <Property Name="Lgota" Type="int" />
+        </EntityType>
+        <EntityType Name="KatPlat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PriceLife">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Obshejit" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FormLearn" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdKatPlat" Type="int" Nullable="false" />
+          <Property Name="September" Type="int" Nullable="false" />
+          <Property Name="October" Type="int" Nullable="false" />
+          <Property Name="November" Type="int" Nullable="false" />
+          <Property Name="December" Type="int" Nullable="false" />
+          <Property Name="January" Type="int" Nullable="false" />
+          <Property Name="February" Type="int" Nullable="false" />
+          <Property Name="March" Type="int" Nullable="false" />
+          <Property Name="April" Type="int" Nullable="false" />
+          <Property Name="May" Type="int" Nullable="false" />
+          <Property Name="June" Type="int" Nullable="false" />
+          <Property Name="July" Type="int" Nullable="false" />
+          <Property Name="August" Type="int" Nullable="false" />
+          <Property Name="Norma" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CardStudent_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="CardStudent" Type="Self.CardStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardStudent">
+              <PropertyRef Name="IdGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CardStudent_KatPlat">
+          <End Role="KatPlat" Type="Self.KatPlat" Multiplicity="1" />
+          <End Role="CardStudent" Type="Self.CardStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KatPlat">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardStudent">
+              <PropertyRef Name="IdKatPlat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CardStudent_PriceLife">
+          <End Role="PriceLife" Type="Self.PriceLife" Multiplicity="1" />
+          <End Role="CardStudent" Type="Self.CardStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriceLife">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardStudent">
+              <PropertyRef Name="IdObshejit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InputPrice_CardStudent">
+          <End Role="CardStudent" Type="Self.CardStudent" Multiplicity="1" />
+          <End Role="InputPrice" Type="Self.InputPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InputPrice">
+              <PropertyRef Name="IdCardStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceLife_KatPlat">
+          <End Role="KatPlat" Type="Self.KatPlat" Multiplicity="1" />
+          <End Role="PriceLife" Type="Self.PriceLife" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KatPlat">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PriceLife">
+              <PropertyRef Name="IdKatPlat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище OplataNETKModelContainer">
+          <EntitySet Name="CardStudent" EntityType="Self.CardStudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InputPrice" EntityType="Self.InputPrice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KatPlat" EntityType="Self.KatPlat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PriceLife" EntityType="Self.PriceLife" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CardStudent_Group" Association="Self.FK_CardStudent_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="CardStudent" EntitySet="CardStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CardStudent_KatPlat" Association="Self.FK_CardStudent_KatPlat">
+            <End Role="KatPlat" EntitySet="KatPlat" />
+            <End Role="CardStudent" EntitySet="CardStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CardStudent_PriceLife" Association="Self.FK_CardStudent_PriceLife">
+            <End Role="PriceLife" EntitySet="PriceLife" />
+            <End Role="CardStudent" EntitySet="CardStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InputPrice_CardStudent" Association="Self.FK_InputPrice_CardStudent">
+            <End Role="CardStudent" EntitySet="CardStudent" />
+            <End Role="InputPrice" EntitySet="InputPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceLife_KatPlat" Association="Self.FK_PriceLife_KatPlat">
+            <End Role="KatPlat" EntitySet="KatPlat" />
+            <End Role="PriceLife" EntitySet="PriceLife" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OplataNETKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CardStudent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdGroup" Type="Int32" Nullable="false" />
+          <Property Name="IdObshejit" Type="Int32" Nullable="false" />
+          <Property Name="IdKatPlat" Type="Int32" Nullable="false" />
+          <Property Name="YearStar" Type="DateTime" Precision="0" />
+          <Property Name="YearFinal" Type="DateTime" Precision="0" />
+          <Property Name="Otchis" Type="Int32" />
+          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Room" Type="Int32" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_CardStudent_Group" FromRole="CardStudent" ToRole="Group" />
+          <NavigationProperty Name="KatPlat" Relationship="Self.FK_CardStudent_KatPlat" FromRole="CardStudent" ToRole="KatPlat" />
+          <NavigationProperty Name="PriceLife" Relationship="Self.FK_CardStudent_PriceLife" FromRole="CardStudent" ToRole="PriceLife" />
+          <NavigationProperty Name="InputPrice" Relationship="Self.FK_InputPrice_CardStudent" FromRole="CardStudent" ToRole="InputPrice" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CardStudent" Relationship="Self.FK_CardStudent_Group" FromRole="Group" ToRole="CardStudent" />
+        </EntityType>
+        <EntityType Name="InputPrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatePrice" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NumberDoc" Type="Int32" Nullable="false" />
+          <Property Name="SumPrice" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdCardStudent" Type="Int32" Nullable="false" />
+          <Property Name="Lgota" Type="Int32" />
+          <NavigationProperty Name="CardStudent" Relationship="Self.FK_InputPrice_CardStudent" FromRole="InputPrice" ToRole="CardStudent" />
+        </EntityType>
+        <EntityType Name="KatPlat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CardStudent" Relationship="Self.FK_CardStudent_KatPlat" FromRole="KatPlat" ToRole="CardStudent" />
+          <NavigationProperty Name="PriceLife" Relationship="Self.FK_PriceLife_KatPlat" FromRole="KatPlat" ToRole="PriceLife" />
+        </EntityType>
+        <EntityType Name="PriceLife">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Obshejit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FormLearn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdKatPlat" Type="Int32" Nullable="false" />
+          <Property Name="September" Type="Int32" Nullable="false" />
+          <Property Name="October" Type="Int32" Nullable="false" />
+          <Property Name="November" Type="Int32" Nullable="false" />
+          <Property Name="December" Type="Int32" Nullable="false" />
+          <Property Name="January" Type="Int32" Nullable="false" />
+          <Property Name="February" Type="Int32" Nullable="false" />
+          <Property Name="March" Type="Int32" Nullable="false" />
+          <Property Name="April" Type="Int32" Nullable="false" />
+          <Property Name="May" Type="Int32" Nullable="false" />
+          <Property Name="June" Type="Int32" Nullable="false" />
+          <Property Name="July" Type="Int32" Nullable="false" />
+          <Property Name="August" Type="Int32" Nullable="false" />
+          <Property Name="Norma" Type="Int32" />
+          <NavigationProperty Name="CardStudent" Relationship="Self.FK_CardStudent_PriceLife" FromRole="PriceLife" ToRole="CardStudent" />
+          <NavigationProperty Name="KatPlat" Relationship="Self.FK_PriceLife_KatPlat" FromRole="PriceLife" ToRole="KatPlat" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_CardStudent_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="CardStudent" Type="Self.CardStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardStudent">
+              <PropertyRef Name="IdGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CardStudent_KatPlat">
+          <End Role="KatPlat" Type="Self.KatPlat" Multiplicity="1" />
+          <End Role="CardStudent" Type="Self.CardStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KatPlat">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardStudent">
+              <PropertyRef Name="IdKatPlat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CardStudent_PriceLife">
+          <End Role="PriceLife" Type="Self.PriceLife" Multiplicity="1" />
+          <End Role="CardStudent" Type="Self.CardStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PriceLife">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CardStudent">
+              <PropertyRef Name="IdObshejit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InputPrice_CardStudent">
+          <End Role="CardStudent" Type="Self.CardStudent" Multiplicity="1" />
+          <End Role="InputPrice" Type="Self.InputPrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardStudent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InputPrice">
+              <PropertyRef Name="IdCardStudent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PriceLife_KatPlat">
+          <End Role="KatPlat" Type="Self.KatPlat" Multiplicity="1" />
+          <End Role="PriceLife" Type="Self.PriceLife" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KatPlat">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PriceLife">
+              <PropertyRef Name="IdKatPlat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OplataNETKEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CardStudent" EntityType="Self.CardStudent" />
+          <EntitySet Name="Group" EntityType="Self.Group" />
+          <EntitySet Name="InputPrice" EntityType="Self.InputPrice" />
+          <EntitySet Name="KatPlat" EntityType="Self.KatPlat" />
+          <EntitySet Name="PriceLife" EntityType="Self.PriceLife" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK_CardStudent_Group" Association="Self.FK_CardStudent_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="CardStudent" EntitySet="CardStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CardStudent_KatPlat" Association="Self.FK_CardStudent_KatPlat">
+            <End Role="KatPlat" EntitySet="KatPlat" />
+            <End Role="CardStudent" EntitySet="CardStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CardStudent_PriceLife" Association="Self.FK_CardStudent_PriceLife">
+            <End Role="PriceLife" EntitySet="PriceLife" />
+            <End Role="CardStudent" EntitySet="CardStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InputPrice_CardStudent" Association="Self.FK_InputPrice_CardStudent">
+            <End Role="CardStudent" EntitySet="CardStudent" />
+            <End Role="InputPrice" EntitySet="InputPrice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PriceLife_KatPlat" Association="Self.FK_PriceLife_KatPlat">
+            <End Role="KatPlat" EntitySet="KatPlat" />
+            <End Role="PriceLife" EntitySet="PriceLife" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище OplataNETKModelContainer" CdmEntityContainer="OplataNETKEntities">
+          <EntitySetMapping Name="CardStudent">
+            <EntityTypeMapping TypeName="OplataNETKModel.CardStudent">
+              <MappingFragment StoreEntitySet="CardStudent">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="IdObshejit" ColumnName="IdObshejit" />
+                <ScalarProperty Name="IdKatPlat" ColumnName="IdKatPlat" />
+                <ScalarProperty Name="YearStar" ColumnName="YearStar" />
+                <ScalarProperty Name="YearFinal" ColumnName="YearFinal" />
+                <ScalarProperty Name="Otchis" ColumnName="Otchis" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group">
+            <EntityTypeMapping TypeName="OplataNETKModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InputPrice">
+            <EntityTypeMapping TypeName="OplataNETKModel.InputPrice">
+              <MappingFragment StoreEntitySet="InputPrice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DatePrice" ColumnName="DatePrice" />
+                <ScalarProperty Name="NumberDoc" ColumnName="NumberDoc" />
+                <ScalarProperty Name="SumPrice" ColumnName="SumPrice" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="IdCardStudent" ColumnName="IdCardStudent" />
+                <ScalarProperty Name="Lgota" ColumnName="Lgota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KatPlat">
+            <EntityTypeMapping TypeName="OplataNETKModel.KatPlat">
+              <MappingFragment StoreEntitySet="KatPlat">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriceLife">
+            <EntityTypeMapping TypeName="OplataNETKModel.PriceLife">
+              <MappingFragment StoreEntitySet="PriceLife">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Obshejit" ColumnName="Obshejit" />
+                <ScalarProperty Name="FormLearn" ColumnName="FormLearn" />
+                <ScalarProperty Name="IdKatPlat" ColumnName="IdKatPlat" />
+                <ScalarProperty Name="September" ColumnName="September" />
+                <ScalarProperty Name="October" ColumnName="October" />
+                <ScalarProperty Name="November" ColumnName="November" />
+                <ScalarProperty Name="December" ColumnName="December" />
+                <ScalarProperty Name="January" ColumnName="January" />
+                <ScalarProperty Name="February" ColumnName="February" />
+                <ScalarProperty Name="March" ColumnName="March" />
+                <ScalarProperty Name="April" ColumnName="April" />
+                <ScalarProperty Name="May" ColumnName="May" />
+                <ScalarProperty Name="June" ColumnName="June" />
+                <ScalarProperty Name="July" ColumnName="July" />
+                <ScalarProperty Name="August" ColumnName="August" />
+                <ScalarProperty Name="Norma" ColumnName="Norma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="OplataNETKModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="OplataNETKModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
